@@ -1,0 +1,122 @@
+CREATE TABLE Locations (
+    id INT PRIMARY KEY,
+    location_name VARCHAR(100) NOT NULL,
+    location_code VARCHAR(10) NOT NULL
+);
+
+drop table Locations
+INSERT INTO Locations (id, location_name, location_code) VALUES (1, 'Visakhapatnam', 'VSKP');
+INSERT INTO Locations (id, location_name, location_code) VALUES (2, 'Vijayawada', 'VJA');
+INSERT INTO Locations (id, location_name, location_code) VALUES (3, 'Guntur', 'GNT');
+INSERT INTO Locations (id, location_name, location_code) VALUES (4, 'Nellore', 'NEL');
+INSERT INTO Locations (id, location_name, location_code) VALUES (5, 'Kurnool', 'KRN');
+INSERT INTO Locations (id, location_name, location_code) VALUES (6, 'Rajahmundry', 'RJY');
+INSERT INTO Locations (id, location_name, location_code) VALUES (7, 'Tirupati', 'TPT');
+INSERT INTO Locations (id, location_name, location_code) VALUES (8, 'Kakinada', 'KKD');
+INSERT INTO Locations (id, location_name, location_code) VALUES (9, 'Kadapa', 'KDP');
+INSERT INTO Locations (id, location_name, location_code) VALUES (10, 'Anantapur', 'ATP');
+INSERT INTO Locations (id, location_name, location_code) VALUES (11, 'Ongole', 'ONG');
+INSERT INTO Locations (id, location_name, location_code) VALUES (12, 'Eluru', 'ELR');
+INSERT INTO Locations (id, location_name, location_code) VALUES (13, 'Machilipatnam', 'MCP');
+INSERT INTO Locations (id, location_name, location_code) VALUES (14, 'Chittoor', 'CTR');
+INSERT INTO Locations (id, location_name, location_code) VALUES (15, 'Tenali', 'TEN');
+INSERT INTO Locations (id, location_name, location_code) VALUES (16, 'Proddatur', 'PDT');
+INSERT INTO Locations (id, location_name, location_code) VALUES (17, 'Hindupur', 'HDP');
+INSERT INTO Locations (id, location_name, location_code) VALUES (18, 'Srikakulam', 'SKM');
+INSERT INTO Locations (id, location_name, location_code) VALUES (19, 'Amalapuram', 'AML');
+INSERT INTO Locations (id, location_name, location_code) VALUES (20, 'Vizianagaram', 'VZM');
+
+select * from Locations
+select * from Theaters
+
+CREATE TABLE Theaters (
+    id INT PRIMARY KEY,
+    theater_name VARCHAR(100) NOT NULL,
+    location_code VARCHAR(10) NOT NULL,
+    FOREIGN KEY (location_code) REFERENCES Locations(location_code)
+);
+
+ALTER TABLE Locations
+ADD CONSTRAINT unique_location_code UNIQUE (location_code);
+
+INSERT INTO Theaters (id, theater_name, location_code) VALUES (1, 'INOX Mahalakshmi Theatre', 'VSKP');
+INSERT INTO Theaters (id, theater_name, location_code) VALUES (2, 'PVR Ripples Mall', 'VJA');
+INSERT INTO Theaters (id, theater_name, location_code) VALUES (3, 'Cinepolis - Ripples Mall', 'GNT');
+INSERT INTO Theaters (id, theater_name, location_code) VALUES (4, 'Cine Square Multiplex', 'NEL');
+INSERT INTO Theaters (id, theater_name, location_code) VALUES (5, 'INOX Kurnool', 'KRN');
+INSERT INTO Theaters (id, theater_name, location_code) VALUES (6, 'INOX Ripples Mall', 'RJY');
+INSERT INTO Theaters (id, theater_name, location_code) VALUES (7, 'PVR - VR Mall', 'TPT');
+INSERT INTO Theaters (id, theater_name, location_code) VALUES (8, 'INOX Kakinada', 'KKD');
+INSERT INTO Theaters (id, theater_name, location_code) VALUES (9, 'INOX S2 Cinemas', 'KDP');
+INSERT INTO Theaters (id, theater_name, location_code) VALUES (10, 'PVR Anantapur', 'ATP');
+INSERT INTO Theaters (id, theater_name, location_code) VALUES (11, 'INOX Ongole', 'ONG');
+INSERT INTO Theaters (id, theater_name, location_code) VALUES (12, 'INOX KIMS Arcade', 'ELR');
+INSERT INTO Theaters (id, theater_name, location_code) VALUES (13, 'INOX Cineplex', 'MCP');
+INSERT INTO Theaters (id, theater_name, location_code) VALUES (14, 'INOX S2 Cinemas', 'CTR');
+INSERT INTO Theaters (id, theater_name, location_code) VALUES (15, 'INOX - Tenali Central Mall', 'TEN');
+INSERT INTO Theaters (id, theater_name, location_code) VALUES (16, 'PVR Proddatur', 'PDT');
+INSERT INTO Theaters (id, theater_name, location_code) VALUES (17, 'Sree Lakshmi Narasimha Picture Palace', 'HDP');
+INSERT INTO Theaters (id, theater_name, location_code) VALUES (18, 'INOX Srikakulam', 'SKM');
+INSERT INTO Theaters (id, theater_name, location_code) VALUES (19, 'Padmapriya Theatre', 'AML');
+INSERT INTO Theaters (id, theater_name, location_code) VALUES (20, 'INOX Vizianagaram', 'VZM');
+INSERT INTO Theaters (id, theater_name, location_code) VALUES (21, 'INOX Varun Beach', 'VSKP');
+INSERT INTO Theaters (id, theater_name, location_code) VALUES (22, 'PVR - MVR Mall', 'VJA');
+INSERT INTO Theaters (id, theater_name, location_code) VALUES (23, 'Cinepolis - The Chennai Shopping Mall', 'GNT');
+INSERT INTO Theaters (id, theater_name, location_code) VALUES (24, 'Cine Square Mall', 'NEL');
+INSERT INTO Theaters (id, theater_name, location_code) VALUES (25, 'INOX S.V. Complex', 'KRN');
+
+
+CREATE TABLE Movies (
+    id INT PRIMARY KEY,
+    movie_name VARCHAR(100) NOT NULL,
+    location_code VARCHAR(10) NOT NULL,
+    theater_name VARCHAR(100) NOT NULL,
+    FOREIGN KEY (location_code) REFERENCES Locations(location_code),
+    FOREIGN KEY (theater_name, location_code) REFERENCES Theaters(theater_name, location_code)
+);
+
+ALTER TABLE Theaters
+ADD CONSTRAINT unique_theater_location UNIQUE (theater_name, location_code);
+
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (1, 'Avengers: Endgame', 'VSKP', 'INOX Mahalakshmi Theatre');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (2, 'Joker', 'VJA', 'PVR Ripples Mall');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (3, 'The Lion King', 'GNT', 'Cinepolis - Ripples Mall');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (4, 'Inception', 'NEL', 'Cine Square Multiplex');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (5, 'Spider-Man: Far From Home', 'KRN', 'INOX Kurnool');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (6, 'Wonder Woman 1984', 'RJY', 'INOX Ripples Mall');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (7, 'Black Widow', 'TPT', 'PVR - VR Mall');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (8, 'Fast & Furious 9', 'KKD', 'INOX Kakinada');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (9, 'Godzilla vs. Kong', 'KDP', 'INOX S2 Cinemas');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (10, 'Tenet', 'ATP', 'PVR Anantapur');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (11, 'Jurassic World: Dominion', 'ONG', 'INOX Ongole');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (12, 'The Conjuring: The Devil Made Me Do It', 'ELR', 'INOX KIMS Arcade');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (13, 'Cruella', 'MCP', 'INOX Cineplex');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (14, 'A Quiet Place Part II', 'CTR', 'INOX S2 Cinemas');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (15, 'F9: The Fast Saga', 'TEN', 'INOX - Tenali Central Mall');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (16, 'The Suicide Squad', 'PDT', 'PVR Proddatur');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (17, 'Shang-Chi and the Legend of the Ten Rings', 'HDP', 'Sree Lakshmi Narasimha Picture Palace');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (18, 'Venom: Let There Be Carnage', 'SKM', 'INOX Srikakulam');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (19, 'Dune', 'AML', 'Padmapriya Theatre');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (20, 'Mission: Impossible - Fallout', 'VZM', 'INOX Vizianagaram');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (21, 'The Dark Knight', 'VSKP', 'INOX Varun Beach');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (22, 'Interstellar', 'VJA', 'PVR - MVR Mall');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (23, 'The Shawshank Redemption', 'GNT', 'Cinepolis - The Chennai Shopping Mall');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (24, 'Avengers: Infinity War', 'NEL', 'Cine Square Mall');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (25, 'The Matrix', 'KRN', 'INOX S.V. Complex');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (26, 'Pulp Fiction', 'RJY', 'Sri Rama Satyanarayana Cineplex');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (27, 'The Godfather', 'TPT', 'Mahalakshmi Deluxe');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (28, 'Fight Club', 'KKD', 'Venkateswara Theatre');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (29, 'The Lord of the Rings: The Fellowship of the Ring', 'KDP', 'Laxmi Deluxe');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (30, 'Forrest Gump', 'ATP', 'Ganga Mahal Theatre');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (31, 'Titanic', 'ONG', 'Prathibha Theatre');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (32, 'The Avengers', 'ELR', 'Raj & Vasavi Cinema');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (33, 'The Social Network', 'MCP', 'Bhaskar Delux Theatre');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (34, 'Inglourious Basterds', 'CTR', 'Padmavathi 70MM');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (35, 'The Departed', 'TEN', 'Prasads IMAX');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (36, 'The Dark Knight Rises', 'PDT', 'Vamsi Krishna Theatre');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (37, 'The Pursuit of Happyness', 'HDP', 'Jai Hind Theatre');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (38, 'Mad Max: Fury Road', 'SKM', 'Padma Talkies');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (39, 'La La Land', 'AML', 'Konark Theatre');
+INSERT INTO Movies (id, movie_name, location_code, theater_name) VALUES (40, 'The Grand Budapest Hotel', 'VZM', 'Venkateswara Deluxe');
+
+select * from Movies
